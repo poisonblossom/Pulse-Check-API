@@ -1,3 +1,9 @@
+# **Watchdog Sentinel**
+In order to achieve the main aim of this project, I have decidedd to crerate a web socket to solve the problems listed in the assignment. 
+
+FLowchart: This is to show the sequence of events when a user is using the Watchdog Sentinel. 
+
+
 # Pulse-Check-API ("Watchdog" Sentinel)
 This challenge is designed to test your ability to bridge Computer Science fundamentals with Modern Backend Engineering.
 
