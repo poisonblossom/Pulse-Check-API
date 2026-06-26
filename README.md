@@ -1,7 +1,8 @@
 # **Watchdog Sentinel**
-In order to achieve the main aim of this project, I have decidedd to crerate a web socket to solve the problems listed in the assignment. 
+In order to achieve the main aim of this project, I have decided combine the functionalities of a web socket and Rest API to solve the problems listed in the assignment. 
 
 FLowchart: This is to show the sequence of events when a user is using the Watchdog Sentinel. 
+
 
 
 # Pulse-Check-API ("Watchdog" Sentinel)
