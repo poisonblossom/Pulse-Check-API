@@ -1,7 +1,7 @@
 # **Watchdog Sentinel**
 Below is the architecture of the Watchdog that shows its behaviour, from registering the device to sending the alert and other scenarios 
 
-![Sequencediagram_.drawio](./Sequencediagram_.drawio.png)
+![Sequencediagram_.drawio](./Sequence diagram _.jpg)
 
 
 # Pulse-Check-API ("Watchdog" Sentinel)
