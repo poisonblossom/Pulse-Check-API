@@ -1,8 +1,7 @@
 # **Watchdog Sentinel**
-In order to achieve the main aim of this project, I have decided combine the functionalities of a web socket and Rest API to solve the problems listed in the assignment. 
+Below is the architecture of the Watchdog that shows its behaviour, from registering the device to sending the alert and other scenarios 
 
-FLowchart: This is to show the sequence of events when a user is using the Watchdog Sentinel. 
-
+![Sequencediagram_.drawio](./Sequencediagram_.drawio.png)
 
 
 # Pulse-Check-API ("Watchdog" Sentinel)
