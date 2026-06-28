@@ -1,11 +1,15 @@
 #creating a system to register the monitor  
 from flask import Flask, request, jsonify
+import threading 
 import time
+
 
 app = Flask(__name__)
 
 # store all monitors
 monitors = {}
+
+lock= threading.Lock()
 
 @app.route('/')
 def home():
