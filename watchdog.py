@@ -14,7 +14,7 @@ def home():
 @app.route('/monitors', methods=['POST'])
 def register_monitor():
 
-    # Process the JSON sent by the client
+    # process the JSON sent by the client
     data = request.get_json()
 
     device_id = data["id"]
@@ -30,7 +30,7 @@ def register_monitor():
     }
 
     return jsonify({
-        "message": "Monitor created successfully",
+        "message": "Monitor created, weldone",
         "device": device_id
     }), 201
 
@@ -38,4 +38,16 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
-# check for 
+# check for the monitor and start the countdown 
+@app.route('/monitors/<device_id>/heartbeat', methods=['POST'])
+def heartbeat(device_id):
+    with lock:
+        if device_id not in monitors:
+            return jsonify({"error":"Monitor not found"}), 404
+        monitor= monitors[device_id]
+        #reset the timer 
+        monitor["last_heatbeat"] = time.time()
+        monitor["status"] = "active"
+        return jsonify({"message": "Heatbeat received", "device": device_id}), 200
+#status, heartbeat received
+#
