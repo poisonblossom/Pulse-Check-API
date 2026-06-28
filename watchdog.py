@@ -63,3 +63,24 @@ def pause_monitor(device_id):
             return jsonify({"error": "Monitor not found"}), 404
         monitors[device_id]["paused"]= True
     return jsonify({"message": "Monitoring paused", "device": device_id}), 200
+
+#view all registered monitors
+
+@app.route('/monitors', methods=['GET'])
+def view_monitors():
+    return jsonify(monitors)
+
+#watchdog alert time 
+def watchdog():
+    while True:
+        time.sleep(1)
+        with lock: 
+            for device_id, monitor in monitors.items():
+                if elapsed >= monitor ["timeout"]:
+                    if monitor["status"] == "active":
+                        print({" ALERT": f"Device {device_id} is down", "time": time.time()})
+                        monitor["status"] = "down"
+                        
+
+
+           
