@@ -40,6 +40,8 @@ def register_monitor():
     }), 201
 
 if __name__ == "__main__":
+    thread = threading.Thread(target=watchdog, daemon=True)
+    thread.start()
     app.run(debug=True)
 
 
@@ -51,12 +53,12 @@ def heartbeat(device_id):
             return jsonify({"error":"Monitor not found"}), 404
         monitor= monitors[device_id]
         #reset the timer 
-        monitor["last_heatbeat"] = time.time()
+        monitor["last_heartbeat"] = time.time()
         monitor["status"] = "active"
-        return jsonify({"message": "Heatbeat received", "device": device_id}), 200
+        return jsonify({"message": "Heartbeat received", "device": device_id}), 200
 #status, heartbeat received
 #pause monitoring
-@app.route ('/montors/<device_id>/pause', method=['POST'])
+@app.route ('/monitors/<device_id>/pause', methods=['POST'])
 def pause_monitor(device_id):
     with lock:
         if device_id not in monitors: 
@@ -85,14 +87,9 @@ def watchdog():
 
                 if elapsed >= monitor ["timeout"]:
                     if monitor["status"] == "active":
-                        print({" ALERT": f"Device {device_id} is down", "time": time.time()})
+                        print({"ALERT": f"Device {device_id} is down", "time": time.time()})
                         monitor["status"] = "down"
 
-#start work 
-if __name__== "__main__":
-    thread= threading.Thread(target= watchdog)
-    thread.daemon= True 
-    thread.start()
 
 
 
