@@ -29,8 +29,9 @@ def register_monitor():
     monitors[device_id] = {
         "timeout": timeout,
         "alert_email": email,
-        "last_heartbeat": time.time(),
-        "status": "active"
+        "last_heartbeat":time.time(),
+        "status": "active",
+        "paused": False
     }
 
     return jsonify({
@@ -54,4 +55,11 @@ def heartbeat(device_id):
         monitor["status"] = "active"
         return jsonify({"message": "Heatbeat received", "device": device_id}), 200
 #status, heartbeat received
-#
+#pause monitoring
+@app.route ('/montors/<device_id>/pause', method=['POST'])
+def pause_monitor(device_id):
+    with lock:
+        if device_id not in monitors: 
+            return jsonify({"error": "Monitor not found"}), 404
+        monitors[device_id]["paused"]= True
+    return jsonify({"message": "Monitoring paused", "device": device_id}), 200
