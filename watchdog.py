@@ -75,12 +75,25 @@ def watchdog():
     while True:
         time.sleep(1)
         with lock: 
+            current_time = time.time()
             for device_id, monitor in monitors.items():
+                if monitor["paused"]:
+                    continue
+
+        
+                elapsed = current_time - monitor["last_heartbeat"]
+
                 if elapsed >= monitor ["timeout"]:
                     if monitor["status"] == "active":
                         print({" ALERT": f"Device {device_id} is down", "time": time.time()})
                         monitor["status"] = "down"
-                        
+
+#start work 
+if __name__== "__main__":
+    thread= threading.Thread(target= watchdog)
+    thread.daemon= True 
+    thread.start()
+
 
 
            
